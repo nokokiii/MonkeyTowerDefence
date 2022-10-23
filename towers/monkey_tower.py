@@ -12,7 +12,7 @@ class Tower:
         self.level = 1
         self.selected = False
         self.menu = None
-        self.imgs = []
+        self.tower_imgs = []
 
     def draw(self, win):
         pass
