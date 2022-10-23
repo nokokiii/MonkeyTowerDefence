@@ -1,13 +1,16 @@
 import pygame
 from enemies.red import Red
 from enemies.blue import Blue
+from enemies.green import Green
+from enemies.pink import Pink
+
 
 class Game:
     def __init__(self):
         self.width = 1280
         self.height = 720
         self.win = pygame.display.set_mode((self.width, self.height))
-        self.enemies = [Red(), Blue()]
+        self.enemies = [Pink(), Green(), Blue(), Red()]
         self.towers = []
         self.lives = 10
         self.money = 10

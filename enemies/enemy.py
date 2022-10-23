@@ -45,10 +45,9 @@ class Enemy:
         x1 = self.path[0]
         x2 = self.path[1]
 
-        self.move_count += 0.0001
-        dirn = x2-x1
+        dirn = (x2-x1)/500
 
-        move_x = (self.x + dirn * self.move_count)
+        move_x = (self.x + dirn)
         self.x = move_x
 
     def hit(self):
