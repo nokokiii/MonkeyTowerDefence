@@ -11,11 +11,14 @@ class ArcherMonkeyLong(Tower):
 
         # Load archer images
         for x in range(1, 5):
-            self
+            self.archer_imgs.append(pygame.transform.scale(pygame.image.load("game_assets/towers/archer_long/archer_long_" + str(x) + ".png"), (70, 70)))
     def draw(self, win):
         super().draw(win)
-        tower = self.tower_imgs[0]
-        win.blit(tower, ((self.x + self.width/2) - (tower.get_width()/2)), (self.y - (tower.get_height()/2)))
+        if self.archer_count >= len(self.archer_imgs):
+            self.archer_imgs = 0
+
+        archer = self.archer_imgs[self.archer_count]
+        win.blit(archer, ((self.x + self.width/2) - (archer.get_width()/2), (self.y - archer.get_height())))
 
         self.archer_count += 1
 
@@ -25,3 +28,4 @@ class ArcherMonkeyLong(Tower):
         :param enemies: list of enemies
         :return: None
         """
+        pass
