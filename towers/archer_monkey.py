@@ -1,21 +1,23 @@
 import pygame
-from monkey_tower import Tower
+from .monkey_tower import Tower
 
-class ArcherMonkeyLong():
+
+class ArcherMonkeyLong(Tower):
     def __init__(self, x, y):
-        super().__init__(self, x, y)
-        self.tower_imgs = []
+        super().__init__(x, y)
+        self.tower_imgs = pygame.transform.scale(pygame.image.load("game_assets/towers/archer_long/archer_tower.png"), (70, 70))
         self.archer_imgs = []
-        self.archer_count = []
+        self.archer_count = 0
 
-        # Load archer tower images
-        for x in range(1,4):
-            self.tower_imgs.append(pygame.transform.scale(pygame.image.load("game_asstes/towers/archer_long_" + str(x) + ".png"), (70, 70)))
-
-        for x in range(1,4):
-            self.tower_imgs.append(pygame.transform.scale(pygame.image.load("game_asstes/towers/archer_short_" + str(x) + ".png"), (70, 70)))
+        # Load archer images
+        for x in range(1, 5):
+            self
     def draw(self, win):
         super().draw(win)
+        tower = self.tower_imgs[0]
+        win.blit(tower, ((self.x + self.width/2) - (tower.get_width()/2)), (self.y - (tower.get_height()/2)))
+
+        self.archer_count += 1
 
     def attack(self, enemies):
         """

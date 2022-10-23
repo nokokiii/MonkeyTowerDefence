@@ -3,6 +3,7 @@ from enemies.red import Red
 from enemies.blue import Blue
 from enemies.green import Green
 from enemies.pink import Pink
+from towers.archer_monkey import ArcherMonkeyLong
 
 
 class Game:
@@ -11,7 +12,7 @@ class Game:
         self.height = 720
         self.win = pygame.display.set_mode((self.width, self.height))
         self.enemies = [Pink(), Green(), Blue(), Red()]
-        self.towers = []
+        self.towers = [ArcherMonkeyLong(100, 100)]
         self.lives = 10
         self.money = 10
         self.bg = pygame.image.load("game_assets/game_maps/map_1.png")
@@ -40,6 +41,10 @@ class Game:
         # draw enemies
         for en in self.enemies:
             en.draw(self.win)
+
+        # draw towers
+        for tw in self.towers:
+            tw.draw(self.win)
         pygame.display.update()
 
 g = Game()
