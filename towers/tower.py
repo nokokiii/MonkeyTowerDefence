@@ -20,8 +20,8 @@ class Tower:
         :param win: surface
         :return: None
         """
-        img = (self.tower_imgs[self.level - 1])
-        win.blit(img, (self.x-img.get_width()//2, self.y-img.get_height()//2))
+        img = self.tower_imgs[self.level - 1]
+        win.blit(img, (self.x - img.get_width()//2, self.y - img.get_height()//2))
 
     def click(self, X, Y):
         """
@@ -57,6 +57,7 @@ class Tower:
         :return: int
         """
         return self.price[self.level - 1]
+
     def move(self, x, y):
         self.x = x
         self.y = y

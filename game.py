@@ -3,7 +3,7 @@ from enemies.red import Red
 from enemies.blue import Blue
 from enemies.green import Green
 from enemies.pink import Pink
-from towers.archer_monkey import ArcherMonkeyLong
+from towers.archerMonkey import ArcherMonkeyLong
 
 
 class Game:
@@ -45,6 +45,7 @@ class Game:
         # draw towers
         for tw in self.towers:
             tw.draw(self.win)
+
         pygame.display.update()
 
 g = Game()
