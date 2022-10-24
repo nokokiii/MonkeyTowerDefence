@@ -11,7 +11,7 @@ class Enemy:
         self.health = 1
         self.path = [-100, 1300]
         self.x = self.path[0]
-        self.y = 225
+        self.y = 250
         self.img = None
         self.max_health = 0
 

@@ -10,7 +10,7 @@ class ArcherMonkeyLong(Tower):
         self.tower_imgs = []
         self.archer_imgs = []
         self.archer_count = 0
-        self.range = 220
+        self.range = 180
         self.inRange = False
         self.left = True
         self.timer = time.time()
