@@ -4,24 +4,29 @@ from enemies.blue import Blue
 from enemies.green import Green
 from enemies.pink import Pink
 from towers.archerMonkey import ArcherMonkeyLong
-
+import time
+import random
 
 class Game:
     def __init__(self):
         self.width = 1280
         self.height = 720
         self.win = pygame.display.set_mode((self.width, self.height))
-        self.enemies = [Pink()]
+        self.enemies = []
         self.towers = [ArcherMonkeyLong(300,360)]
         self.lives = 10
         self.money = 10
         self.bg = pygame.image.load("game_assets/game_maps/map_1.png")
+        self.timer = time.time()
 
     def run(self):
         run = True
         clock = pygame.time.Clock()
         while run:
             clock.tick(60)
+            if time.time() - self.timer >= 2:
+                self.timer = time.time()
+                self.enemies.append(random.choice([Red(), Blue(), Green(), Pink()]))
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
