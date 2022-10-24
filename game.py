@@ -22,6 +22,7 @@ class Game:
         clock = pygame.time.Clock()
         while run:
             clock.tick(60)
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
@@ -58,8 +59,6 @@ class Game:
         # draw towers
         for tw in self.towers:
             tw.draw(self.win)
-
-
 
         pygame.display.update()
 
