@@ -2,6 +2,7 @@ import pygame
 from .tower import Tower
 import math
 
+
 class ArcherMonkeyLong(Tower):
     def __init__(self, x, y):
         super().__init__(x, y)
@@ -39,7 +40,6 @@ class ArcherMonkeyLong(Tower):
         :return: None
         """
         self.range = r
-
 
     def attack(self, enemies):
         """
