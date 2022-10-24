@@ -11,8 +11,8 @@ class Game:
         self.width = 1280
         self.height = 720
         self.win = pygame.display.set_mode((self.width, self.height))
-        self.enemies = [Pink(), Green(), Blue(), Red()]
-        self.towers = [ArcherMonkeyLong(100, 100)]
+        self.enemies = [Pink()]
+        self.towers = [ArcherMonkeyLong(300,360)]
         self.lives = 10
         self.money = 10
         self.bg = pygame.image.load("game_assets/game_maps/map_1.png")
@@ -31,6 +31,19 @@ class Game:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     pass
 
+            # loop through enemies b
+            to_del = []
+            for en in self.enemies:
+                if en.x > 1300:
+                    to_del.append(en)
+
+            # delete all enemies off the screen
+            for d in to_del:
+                self.enemies.remove(d)
+
+            # loop through towers
+            for tw in self.towers:
+                tw.attack(self.enemies)
             self.draw()
 
         pygame.quit()
@@ -45,6 +58,8 @@ class Game:
         # draw towers
         for tw in self.towers:
             tw.draw(self.win)
+
+
 
         pygame.display.update()
 
