@@ -10,5 +10,5 @@ class Green(Enemy):
         self.max_health = 3
         self.health = self.max_health
 
-        img = pygame.image.load("game_assets/enemies/3/enemy_green.png")
+        img = pygame.image.load("game_assets/enemies/enemy_3.png")
         self.imgs.append(pygame.transform.scale(img, (60, 60)))
