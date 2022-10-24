@@ -13,7 +13,7 @@ class Enemy:
         self.x = self.path[0]
         self.y = 225
         self.img = None
-        self.move_count = 0
+        self.max_health = 0
 
     def draw(self, win):
         """

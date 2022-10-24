@@ -38,7 +38,7 @@ class ArcherMonkeyLong(Tower):
 
         archer = self.archer_imgs[self.archer_count // 7]
         win.blit(archer, ((self.x + self.width / 2) - (archer.get_width() / 2),
-                          (self.y - archer.get_height() + (archer.get_height() / 2) - 5)))
+                          (self.y - archer.get_height() + (archer.get_height()/2) - 20)))
 
     def change_range(self, r):
         """
