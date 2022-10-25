@@ -7,6 +7,9 @@ from towers.archerMonkey import ArcherMonkeyLong, ArcherMonkeyShort
 import time
 import random
 
+lifes_img = pygame.transform.scale(pygame.image.load("game_assets/heart.png"), (20, 20))
+coin_img = pygame.image.load("game_assets/coin.png")
+
 
 class Game:
     def __init__(self):
@@ -14,8 +17,8 @@ class Game:
         self.height = 720
         self.win = pygame.display.set_mode((self.width, self.height))
         self.enemies = []
-        self.towers = [ArcherMonkeyLong(300, 360), ArcherMonkeyShort(800,360)]
-        self.lives = 10
+        self.towers = [ArcherMonkeyLong(300, 360 ), ArcherMonkeyShort(800,360)]
+        self.lifes = 10
         self.money = 10
         self.bg = pygame.image.load("game_assets/game_maps/map_1.png")
         self.timer = time.time()
@@ -65,6 +68,12 @@ class Game:
         # draw enemies
         for en in self.enemies:
             en.draw(self.win)
+
+        # draw lifes
+        start_x = self.width
+        life = lifes_img
+        for x in range(self.lifes):
+            self.win.blit(life, (start_x - life.get_width()*x + 5, 10))
 
         pygame.display.update()
 
