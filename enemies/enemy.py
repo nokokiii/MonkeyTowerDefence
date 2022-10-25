@@ -3,7 +3,6 @@ import math
 
 
 class Enemy:
-    imgs = []
 
     def __init__(self):
         self.width = 64
@@ -15,6 +14,7 @@ class Enemy:
         self.img = None
         self.max_health = 0
         self.enemy_speed = 0
+        self.imgs = []
 
     def draw(self, win):
         """

@@ -10,7 +10,7 @@ class Red(Enemy):
 
     def __init__(self):
         super().__init__()
-        self.imgs = []
+        self.imgs = imgs
         self.max_health = 1
         self.health = self.max_health
         self.enemy_speed = 1.9
