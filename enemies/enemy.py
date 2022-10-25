@@ -3,6 +3,7 @@ import math
 
 
 class Enemy:
+    imgs = []
 
     def __init__(self):
         self.width = 64
@@ -13,8 +14,8 @@ class Enemy:
         self.y = 250
         self.img = None
         self.max_health = 0
-        self.enemy_speed = 0
-        self.imgs = []
+        self.enemy_speed = [1.9, 2.2, 2.7, 3.5]
+        self.speed = 0
 
     def draw(self, win):
         """
@@ -22,7 +23,10 @@ class Enemy:
         :param win: surface
         :return: None
         """
-        self.img = self.imgs[0]
+        # O TO O KURWA
+        for x in range(4):
+            if self.health == x + 1:
+                self.img = self.imgs[x]
         win.blit(self.img, (self.x, self.y))
         self.move()
 
@@ -46,9 +50,11 @@ class Enemy:
         x1 = self.path[0]
         x2 = self.path[1]
 
-        dirn = self.enemy_speed
+        for x in range(4):
+            if self.health == x:
+                self.speed = self.enemy_speed[x]
 
-        move_x = (self.x + dirn)
+        move_x = (self.x + self.speed)
         self.x = move_x
 
     def hit(self):

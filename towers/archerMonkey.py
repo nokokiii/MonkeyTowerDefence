@@ -25,7 +25,7 @@ class ArcherMonkeyLong(Tower):
         self.inRange = False
         self.left = True
         self.timer = time.time()
-        self.hit_delay = 2
+        self.hit_delay = 1
 
     def draw(self, win):
         surface = pygame.Surface((self.range * 4, self.range * 4), pygame.SRCALPHA, 32)
@@ -117,5 +117,5 @@ class ArcherMonkeyShort(ArcherMonkeyLong):
         self.archer_imgs = archer_imgs2
         self.archer_count = 0
         self.range = 180
-        self.hit_delay = 1
+        self.hit_delay = 0.5
 
