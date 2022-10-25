@@ -14,7 +14,7 @@ class Game:
         self.height = 720
         self.win = pygame.display.set_mode((self.width, self.height))
         self.enemies = []
-        self.towers = [ArcherMonkeyLong(300,160), ArcherMonkeyLong(800,360), ArcherMonkeyShort(300, 360)]
+        self.towers = [ArcherMonkeyLong(300, 360), ArcherMonkeyShort(800,360)]
         self.lives = 10
         self.money = 10
         self.bg = pygame.image.load("game_assets/game_maps/map_1.png")
@@ -58,13 +58,13 @@ class Game:
     def draw(self):
         self.win.blit(self.bg, (0, 0))
 
-        # draw enemies
-        for en in self.enemies:
-            en.draw(self.win)
-
         # draw towers
         for tw in self.towers:
             tw.draw(self.win)
+
+        # draw enemies
+        for en in self.enemies:
+            en.draw(self.win)
 
         pygame.display.update()
 
