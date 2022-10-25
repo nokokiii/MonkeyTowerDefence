@@ -1,6 +1,10 @@
 import pygame
 from .enemy import Enemy
 
+imgs = []
+img = pygame.image.load("game_assets/enemies/enemy_1.png")
+imgs.append(pygame.transform.scale(img, (55, 55)))
+
 
 class Red(Enemy):
 
@@ -9,6 +13,4 @@ class Red(Enemy):
         self.imgs = []
         self.max_health = 1
         self.health = self.max_health
-
-        img = pygame.image.load("game_assets/enemies/enemy_1.png")
-        self.imgs.append(pygame.transform.scale(img, (55, 55)))
+        self.enemy_speed = 1.9

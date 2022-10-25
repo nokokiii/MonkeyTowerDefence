@@ -92,3 +92,27 @@ class ArcherMonkeyLong(Tower):
                 self.left = False
                 for x, img in enumerate(self.archer_imgs):
                     self.archer_imgs[x] = pygame.transform.flip(img, True, False)
+
+
+archer_imgs = []
+tower_imgs = []
+
+tower_imgs.append(pygame.transform.scale(pygame.image.load("game_assets/towers/archer_long/archer_tower.png"),
+                                                      (70, 70)))
+# Load archer images
+for x in range(1, 5):
+    archer_imgs.append(pygame.transform.scale(pygame.image.load("game_assets/towers/archer_long/long_archer_" + str(x) + ".png"),
+                                                   (65, 65)))
+
+
+class ArcherMonkeyShort(ArcherMonkeyLong):
+    def __init__(self, x, y):
+        super().__init__(x, y)
+        self.tower_imgs = []
+        self.archer_imgs = []
+        self.archer_count = 0
+        self.range = 180
+        self.inRange = False
+        self.left = True
+        self.timer = time.time()
+

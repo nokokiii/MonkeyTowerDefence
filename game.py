@@ -25,7 +25,7 @@ class Game:
         clock = pygame.time.Clock()
         while run:
             clock.tick(60)
-            if time.time() - self.timer >= random.randrange(1, 8)/3:
+            if time.time() - self.timer >= random.randrange(2, 8)/3:
                 self.timer = time.time()
                 self.enemies.append(random.choice([Red(), Blue(), Green(), Pink()]))
 

@@ -14,6 +14,7 @@ class Enemy:
         self.y = 250
         self.img = None
         self.max_health = 0
+        self.enemy_speed = 0
 
     def draw(self, win):
         """
@@ -45,7 +46,7 @@ class Enemy:
         x1 = self.path[0]
         x2 = self.path[1]
 
-        dirn = (x2-x1)/500
+        dirn = self.enemy_speed
 
         move_x = (self.x + dirn)
         self.x = move_x
