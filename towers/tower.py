@@ -1,3 +1,5 @@
+import pygame
+
 class Tower:
     """
     Abstract class for towers
@@ -12,6 +14,7 @@ class Tower:
         self.level = 1
         self.selected = False
         self.menu = None
+        self.range = 0
         self.tower_imgs = []
         self.damage = 0
 
@@ -23,6 +26,13 @@ class Tower:
         """
         img = self.tower_imgs[self.level - 1]
         win.blit(img, (self.x - img.get_width()//2, self.y - img.get_height()//2))
+
+    def draw_radius(self, win):
+        # draw range circle
+        circle_surface = pygame.Surface((self.range * 2, self.range * 2))
+        circle_surface.set_alpha(128)
+
+        pygame.draw.circle(circle_surface, (255, 0, 0), (self.x, self.y), self.range, 4)
 
     def click(self, X, Y):
         """

@@ -46,12 +46,6 @@ class ArcherMonkeyLong(Tower):
         win.blit(archer, ((self.x + self.width / 2) - (archer.get_width() / 2),
                           (self.y - archer.get_height() + (archer.get_height() / 2) - 20)))
 
-        # draw range circle
-        circle_surface = pygame.Surface((self.range * 2, self.range * 2))
-        circle_surface.set_alpha(128)
-
-        pygame.draw.circle(circle_surface, (255, 0, 0), (self.x, self.y), self.range, 4)
-
     def change_range(self, r):
         """
         Change range of archer tower
