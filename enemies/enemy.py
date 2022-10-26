@@ -3,6 +3,8 @@ import math
 
 
 class Enemy:
+    imgs = []
+
     def __init__(self):
         self.width = 64
         self.height = 64
@@ -59,14 +61,14 @@ class Enemy:
         move_x = (self.x + self.speed)
         self.x = move_x
 
-    def hit(self):
+    def hit(self, damage):
         """
         Return if an enemy has dies and removes one health
         each call
         :return: Bool
         """
         self.pop = True
-        self.health -= 1
+        self.health -= damage
         if self.health <= 0:
             return True
         return False

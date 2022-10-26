@@ -8,11 +8,12 @@ archer_imgs1 = []
 
 # Load tower img
 tower_imgs1.append(pygame.transform.scale(pygame.image.load("game_assets/towers/archer_long/archer_tower.png"),
-                                                      (70, 70)))
+                                          (70, 70)))
 # Load archer images
 for x in range(1, 5):
-    archer_imgs1.append(pygame.transform.scale(pygame.image.load("game_assets/towers/archer_long/long_archer_" + str(x) + ".png"),
-                                                   (65, 65)))
+    archer_imgs1.append(
+        pygame.transform.scale(pygame.image.load("game_assets/towers/archer_long/long_archer_" + str(x) + ".png"),
+                               (65, 65)))
 
 
 class ArcherMonkeyLong(Tower):
@@ -25,7 +26,8 @@ class ArcherMonkeyLong(Tower):
         self.inRange = False
         self.left = True
         self.timer = time.time()
-        self.hit_delay = 1
+        self.hit_delay = 2
+        self.damage = 1
 
     def draw(self, win):
         surface = pygame.Surface((self.range * 4, self.range * 4), pygame.SRCALPHA, 32)
@@ -34,24 +36,21 @@ class ArcherMonkeyLong(Tower):
         super().draw(win)
 
         if self.inRange:
-            # pygame.draw.circle(surface, (255, 0, 0, 100), (self.range, self.range), self.range, 0)
-            # win.blit(surface, (self.x - self.range, self.y - self.range))
             self.archer_count += 1
-            if self.archer_count >= len(self.archer_imgs) * 7:
+            if self.archer_count >= len(self.archer_imgs) * (self.hit_delay * 7):
                 self.archer_count = 0
         else:
             self.archer_count = 0
 
-        archer = self.archer_imgs[self.archer_count // 7]
+        archer = self.archer_imgs[self.archer_count // (self.hit_delay * 7)]
         win.blit(archer, ((self.x + self.width / 2) - (archer.get_width() / 2),
-                          (self.y - archer.get_height() + (archer.get_height()/2) - 20)))
+                          (self.y - archer.get_height() + (archer.get_height() / 2) - 20)))
 
         # draw range circle
         circle_surface = pygame.Surface((self.range * 2, self.range * 2))
         circle_surface.set_alpha(128)
 
         pygame.draw.circle(circle_surface, (255, 0, 0), (self.x, self.y), self.range, 4)
-
 
     def change_range(self, r):
         """
@@ -74,7 +73,7 @@ class ArcherMonkeyLong(Tower):
             x = enemy.x
             y = enemy.y
 
-            dis = math.sqrt(((self.x - x)**2 - 16)+ (self.y - y)**2)
+            dis = math.sqrt(((self.x - x) ** 2 - 16) + (self.y - y) ** 2)
 
             if dis < self.range:
                 self.inRange = True
@@ -85,9 +84,8 @@ class ArcherMonkeyLong(Tower):
             first_enemy = enemy_closest[0]
             if time.time() - self.timer >= self.hit_delay:
                 self.timer = time.time()
-                if first_enemy.hit() == True:
+                if first_enemy.hit(self.damage):
                     enemies.remove(first_enemy)
-
             if first_enemy.x < self.x and not(self.left):
                 self.left = True
                 for x, img in enumerate(self.archer_imgs):
@@ -103,11 +101,12 @@ tower_imgs2 = []
 
 # Load tower img
 tower_imgs2.append(pygame.transform.scale(pygame.image.load("game_assets/towers/archer_long/archer_tower.png"),
-                                                      (70, 70)))
+                                          (70, 70)))
 # Load archer images
 for x in range(1, 5):
-    archer_imgs2.append(pygame.transform.scale(pygame.image.load("game_assets/towers/archer_short/short_archer_" + str(x) + ".png"),
-                                                   (65, 65)))
+    archer_imgs2.append(
+        pygame.transform.scale(pygame.image.load("game_assets/towers/archer_short/short_archer_" + str(x) + ".png"),
+                               (65, 65)))
 
 
 class ArcherMonkeyShort(ArcherMonkeyLong):
@@ -117,5 +116,5 @@ class ArcherMonkeyShort(ArcherMonkeyLong):
         self.archer_imgs = archer_imgs2
         self.archer_count = 0
         self.range = 180
-        self.hit_delay = 0.5
-
+        self.hit_delay = 1
+        self.damage = 2
