@@ -3,8 +3,6 @@ import math
 
 
 class Enemy:
-    imgs = []
-
     def __init__(self):
         self.width = 64
         self.height = 64
@@ -16,6 +14,7 @@ class Enemy:
         self.max_health = 0
         self.enemy_speed = [1.9, 2.2, 2.7, 3.5]
         self.speed = 0
+        self.pop = False
 
     def draw(self, win):
         """
@@ -23,9 +22,12 @@ class Enemy:
         :param win: surface
         :return: None
         """
-        # O TO O KURWA
         for x in range(4):
-            if self.health == x + 1:
+            if self.pop:
+                pop_img = pygame.transform.scale(pygame.image.load("game_assets/enemies/pop.png"), (70, 70))
+                self.img = pop_img
+                self.pop = False
+            elif self.health == x + 1:
                 self.img = self.imgs[x]
         win.blit(self.img, (self.x, self.y))
         self.move()
@@ -63,6 +65,7 @@ class Enemy:
         each call
         :return: Bool
         """
+        self.pop = True
         self.health -= 1
         if self.health <= 0:
             return True
