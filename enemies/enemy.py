@@ -14,7 +14,7 @@ class Enemy:
         self.y = 250
         self.img = None
         self.max_health = 0
-        self.enemy_speed = [1.9, 2.2, 2.7, 3.5]
+        self.enemy_speed = [2.1, 2.6, 3, 3.6]
         self.speed = 0
         self.pop = False
 
@@ -34,15 +34,15 @@ class Enemy:
         win.blit(self.img, (self.x, self.y))
         self.move()
 
-    def collide(self, X, Y):
+    def collide(self, collide_x, collide_y):
         """
         Returns if position has hit enemy
-        :param X: int
-        :param Y: int
+        :param collide_x: int
+        :param collide_y: int
         :return: Bool
         """
-        if X <= self.x + self.width and X >= self.x:
-            if Y <= self.y + self.height and Y >= self.y:
+        if collide_x <= self.x + self.width and collide_x >= self.x:
+            if collide_y <= self.y + self.height and collide_y >= self.y:
                 return True
         return False
 
@@ -51,9 +51,6 @@ class Enemy:
         Move enemy
         :return: None
         """
-        x1 = self.path[0]
-        x2 = self.path[1]
-
         for x in range(4):
             if self.health == x:
                 self.speed = self.enemy_speed[x]

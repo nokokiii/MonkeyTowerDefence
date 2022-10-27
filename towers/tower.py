@@ -20,30 +20,35 @@ class Tower:
 
     def draw(self, win):
         """
-        Draws the tower
+        draws the tower
         :param win: surface
         :return: None
         """
         img = self.tower_imgs[self.level - 1]
-        win.blit(img, (self.x - img.get_width()//2, self.y - img.get_height()//2))
+        win.blit(img, (self.x - img.get_width() // 2, self.y - img.get_height() // 2))
+
+        # draw menu
+        if self.selected:
+            self.menu.draw(win)
 
     def draw_radius(self, win):
-        # draw range circle
-        circle_surface = pygame.Surface((self.range * 2, self.range * 2))
-        circle_surface.set_alpha(128)
+        if self.selected:
+            # draw range circle
+            surface = pygame.Surface((self.range * 4, self.range * 4), pygame.SRCALPHA, 32)
+            pygame.draw.circle(surface, (128, 128, 128, 100), (self.range, self.range), self.range, 0)
 
-        pygame.draw.circle(circle_surface, (255, 0, 0), (self.x, self.y), self.range, 4)
+            win.blit(surface, (self.x - self.range, self.y - self.range))
 
-    def click(self, X, Y):
+    def click(self, click_x, click_y):
         """
         Returns if tower has been clicked on
         and selects tower id it was clicked
-        :param X: int
-        :param Y: int
+        :param click_x:
+        :param click_y:
         :return: Bool
         """
-        if X <= self.x + self.width and X >= self.x:
-            if Y <= self.y + self.height and Y >= self.y:
+        if click_x <= self.x + self.width and click_x >= self.x:
+            if click_y <= self.y + self.height and click_y >= self.y:
                 return True
         return False
 

@@ -4,10 +4,12 @@ from enemies.blue import Blue
 from enemies.green import Green
 from enemies.pink import Pink
 from towers.archerMonkey import ArcherMonkeyLong, ArcherMonkeyShort
+from towers.supportTower import MonkeyVillage, Alchemist
 import time
 import random
+pygame.font.init()
 
-lifes_img = pygame.transform.scale(pygame.image.load("game_assets/heart.png"), (20, 20))
+lifes_img = pygame.transform.scale(pygame.image.load("game_assets/heart.png"), (40, 40))
 coin_img = pygame.image.load("game_assets/coin.png")
 
 
@@ -17,11 +19,13 @@ class Game:
         self.height = 720
         self.win = pygame.display.set_mode((self.width, self.height))
         self.enemies = []
-        self.towers = [ArcherMonkeyLong(800,360), ArcherMonkeyShort(300, 360)]
-        self.lives = 10
+        self.attack_towers = [ArcherMonkeyLong(800, 360), ArcherMonkeyShort(300, 360)]
+        self.support_towers = [Alchemist(300, 100), MonkeyVillage(700, 100)]
+        self.lifes = 100
         self.money = 10
         self.bg = pygame.image.load("game_assets/game_maps/map_1.png")
         self.timer = time.time()
+        self.lifes_font = pygame.font.SysFont("comicsans", 40)
 
     def run(self):
         run = True
@@ -41,7 +45,7 @@ class Game:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     pass
 
-            # loop through enemies b
+            # loop through enemies
             to_del = []
             for en in self.enemies:
                 if en.x > 1300:
@@ -51,9 +55,19 @@ class Game:
             for d in to_del:
                 self.enemies.remove(d)
 
-            # loop through towers
-            for tw in self.towers:
-                tw.attack(self.enemies)
+            # loop through attack towers
+            for atw in self.attack_towers:
+                atw.attack(self.enemies)
+
+            # loop  through support towers
+            for stw in self.support_towers:
+                stw.support(self.attack_towers)
+
+            # if you lose
+            if self.lifes < 0:
+                print("You lose")
+                run = False
+
             self.draw()
 
         pygame.quit()
@@ -61,25 +75,30 @@ class Game:
     def draw(self):
         self.win.blit(self.bg, (0, 0))
 
-        # draw enemies
+        # Draw support tower
+        for stw in self.support_towers:
+            stw.draw(self.win)
+
+        # Draw towers
+        for atw in self.attack_towers:
+            atw.draw(self.win)
+
+        # Draw enemies
         for en in self.enemies:
             en.draw(self.win)
 
-        # draw towers
-        for tw in self.towers:
-            tw.draw(self.win)
-
-        # draw enemies
-        for en in self.enemies:
-            en.draw(self.win)
-
-        # draw lifes
+        # Draw lifes
+        text = self.lifes_font.render(str(self.lifes), 1, (0, 0, 0))
         start_x = self.width
         life = lifes_img
-        for x in range(self.lifes):
-            self.win.blit(life, (start_x - life.get_width()*x + 5, 10))
+
+        self.win.blit(text, (start_x - text.get_width() - 55, 5))
+        self.win.blit(life, (start_x - life.get_width() - 10, 15))
 
         pygame.display.update()
+
+    def draw_menu(self):
+        pass
 
 g = Game()
 g.run()
