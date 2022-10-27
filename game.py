@@ -34,13 +34,11 @@ class Game:
             clock.tick(60)
             if time.time() - self.timer >= random.randrange(1, 5)/2:
                 self.timer = time.time()
-                self.enemies.append(random.choice([Red(), Blue(), Green(), Pink(), Pink(), Pink()]))
+                self.enemies.append(random.choice([Red(), Blue(), Green(), Pink()]))
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
-
-                pos = pygame.mouse.get_pos()
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     pass

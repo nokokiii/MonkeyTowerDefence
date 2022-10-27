@@ -6,6 +6,7 @@ class Enemy:
     imgs = []
 
     def __init__(self):
+        self.img = None
         self.width = 64
         self.height = 64
         self.health = 1
@@ -23,7 +24,7 @@ class Enemy:
         :param win: surface
         :return: None
         """
-        for x in range(1, 5):
+        for x in range(4):
             if self.pop:
                 self.img = pygame.transform.scale(pygame.image.load("game_assets/enemies/pop.png"), (70, 70))
                 self.pop = False
@@ -68,3 +69,6 @@ class Enemy:
         if self.health <= 0:
             return True
         return False
+
+    def attacking(self):
+        return self.health
