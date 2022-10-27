@@ -12,7 +12,6 @@ class Enemy:
         self.path = [-100, 1300]
         self.x = self.path[0]
         self.y = 250
-        self.img = None
         self.max_health = 0
         self.enemy_speed = [2.1, 2.6, 3, 3.6]
         self.speed = 0
@@ -24,14 +23,14 @@ class Enemy:
         :param win: surface
         :return: None
         """
-        for x in range(4):
+        for x in range(1, 5):
             if self.pop:
-                pop_img = pygame.transform.scale(pygame.image.load("game_assets/enemies/pop.png"), (70, 70))
-                self.img = pop_img
+                self.img = pygame.transform.scale(pygame.image.load("game_assets/enemies/pop.png"), (70, 70))
                 self.pop = False
+                win.blit(self.img, (self.x, self.y))
             elif self.health == x + 1:
                 self.img = self.imgs[x]
-        win.blit(self.img, (self.x, self.y))
+                win.blit(self.img, (self.x, self.y))
         self.move()
 
     def collide(self, collide_x, collide_y):

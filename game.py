@@ -19,7 +19,7 @@ class Game:
         self.height = 720
         self.win = pygame.display.set_mode((self.width, self.height))
         self.enemies = []
-        self.attack_towers = [ArcherMonkeyLong(800, 360), ArcherMonkeyShort(300, 360)]
+        self.attack_towers = [ArcherMonkeyLong(300, 360), ArcherMonkeyShort(800, 360)]
         self.support_towers = [Alchemist(300, 100), MonkeyVillage(700, 100)]
         self.lifes = 100
         self.money = 10
@@ -32,9 +32,9 @@ class Game:
         clock = pygame.time.Clock()
         while run:
             clock.tick(60)
-            if time.time() - self.timer >= random.randrange(2, 8)/3:
+            if time.time() - self.timer >= random.randrange(1, 5)/2:
                 self.timer = time.time()
-                self.enemies.append(random.choice([Red(), Blue(), Green(), Pink()]))
+                self.enemies.append(random.choice([Red(), Blue(), Green(), Pink(), Pink(), Pink()]))
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

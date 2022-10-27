@@ -1,5 +1,6 @@
 import pygame
 
+
 class Tower:
     """
     Abstract class for towers

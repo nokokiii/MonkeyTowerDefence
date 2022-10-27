@@ -26,7 +26,7 @@ class ArcherMonkeyLong(Tower):
         self.inRange = False
         self.left = True
         self.timer = time.time()
-        self.hit_delay = 3
+        self.hit_delay = 1
         self.damage = 1
 
     def draw(self, win):
@@ -76,11 +76,11 @@ class ArcherMonkeyLong(Tower):
         enemy_closest.sort(key=lambda x: x.x)
         if len(enemy_closest) > 0:
             first_enemy = enemy_closest[0]
-            if time.time() - self.timer >= self.hit_delay/2:
+            if time.time() - self.timer >= self.hit_delay:
                 self.timer = time.time()
                 if first_enemy.hit(self.damage):
                     enemies.remove(first_enemy)
-            if first_enemy.x < self.x and not(self.left):
+            if first_enemy.x < self.x and not self.left:
                 self.left = True
                 for x, img in enumerate(self.archer_imgs):
                     self.archer_imgs[x] = pygame.transform.flip(img, True, False)
@@ -91,15 +91,13 @@ class ArcherMonkeyLong(Tower):
 
 
 archer_imgs2 = []
-tower_imgs2 = []
+tower_imgs2 = [pygame.transform.scale(pygame.image.load("game_assets/towers/archer_long/archer_tower.png"),
+                                      (70, 70))]
 
-# Load tower img
-tower_imgs2.append(pygame.transform.scale(pygame.image.load("game_assets/towers/archer_long/archer_tower.png"),
-                                          (70, 70)))
 # Load archer images
 for x in range(1, 5):
     archer_imgs2.append(
-        pygame.transform.scale(pygame.image.load("game_assets/towers/archer_short/short_archer_" + str(x) + ".png"),2
+        pygame.transform.scale(pygame.image.load("game_assets/towers/archer_short/short_archer_" + str(x) + ".png"),
                                (65, 65)))
 
 
@@ -110,5 +108,5 @@ class ArcherMonkeyShort(ArcherMonkeyLong):
         self.archer_imgs = archer_imgs2
         self.archer_count = 0
         self.range = 180
-        self.hit_delay = 2
+        self.hit_delay = 1
         self.damage = 2
