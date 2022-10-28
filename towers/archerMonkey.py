@@ -23,18 +23,17 @@ class ArcherMonkeyLong(Tower):
         self.archer_imgs = archer_imgs1
         self.archer_count = 0
         self.range = 220
+        self.original_range = self.range
         self.inRange = False
         self.left = True
         self.timer = time.time()
         self.hit_delay = 1
         self.damage = 1
+        self.original_damage = self.damage
 
     def draw(self, win):
-        surface = pygame.Surface((self.range * 4, self.range * 4), pygame.SRCALPHA, 32)
-        pygame.draw.circle(surface, (128, 128, 128, 100), (self.range, self.range), self.range, 0)
-        win.blit(surface, (self.x - self.range, self.y - self.range))
+        super().draw_radius(win)
         super().draw(win)
-
         if self.inRange:
             self.archer_count += 1
             if self.archer_count >= len(self.archer_imgs) * (self.hit_delay * 7):
@@ -93,7 +92,6 @@ class ArcherMonkeyLong(Tower):
 archer_imgs2 = []
 tower_imgs2 = [pygame.transform.scale(pygame.image.load("game_assets/towers/archer_long/archer_tower.png"),
                                       (70, 70))]
-
 # Load archer images
 for x in range(1, 5):
     archer_imgs2.append(
@@ -108,5 +106,7 @@ class ArcherMonkeyShort(ArcherMonkeyLong):
         self.archer_imgs = archer_imgs2
         self.archer_count = 0
         self.range = 180
+        self.original_range = self.range
         self.hit_delay = 1
         self.damage = 2
+        self.original_damage = self.damage

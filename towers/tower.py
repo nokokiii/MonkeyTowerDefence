@@ -15,6 +15,7 @@ class Tower:
         self.level = 1
         self.selected = False
         self.menu = None
+        self.original_range = 0
         self.range = 0
         self.tower_imgs = []
         self.damage = 0
@@ -34,10 +35,9 @@ class Tower:
 
     def draw_radius(self, win):
         if self.selected:
-            # draw range circle
+            # draw range of the tower
             surface = pygame.Surface((self.range * 4, self.range * 4), pygame.SRCALPHA, 32)
             pygame.draw.circle(surface, (128, 128, 128, 100), (self.range, self.range), self.range, 0)
-
             win.blit(surface, (self.x - self.range, self.y - self.range))
 
     def click(self, click_x, click_y):

@@ -10,17 +10,14 @@ class MonkeyVillage(Tower):
     """
     Adding more range to towers in its range
     """
-
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.range = 75
+        self.range = 90
         self.tower_imgs = monkey_village_imgs[:]
-        self.effect = [1, 2]
+        self.effect = [0.2, 0.4]
 
     def draw(self, win):
-        surface = pygame.Surface((self.range * 4, self.range * 4), pygame.SRCALPHA, 32)
-        pygame.draw.circle(surface, (128, 128, 128, 100), (self.range, self.range), self.range, 0)
-        win.blit(surface, (self.x - self.range, self.y - self.range))
+        super().draw_radius(win)
         super().draw(win)
 
     def support(self, towers):
@@ -39,7 +36,7 @@ class MonkeyVillage(Tower):
             if dis <= self.range:
                 effected.append(tower)
         for tower in effected:
-            tower.range += round(tower.range * self.effect[self.level - 1])
+            tower.range = tower.original_range + round(tower.original_range * self.effect[self.level - 1])
 
 
 alchemist_imgs = [pygame.transform.scale(pygame.image.load("game_assets/towers/support_tower/alchemist.png"), (80, 80))]
@@ -53,7 +50,7 @@ class Alchemist(MonkeyVillage):
     def __init__(self, x, y):
         super().__init__(x, y)
         self.range = 100
-        self.effect = [1, 2]
+        self.effect = [2, 3]
         self.tower_imgs = alchemist_imgs[:]
 
     def support(self, towers):
@@ -72,4 +69,4 @@ class Alchemist(MonkeyVillage):
             if dis <= self.range:
                 effected.append(tower)
         for tower in effected:
-            tower.damage += round(tower.damage * self.effect[self.level - 1])
+            tower.damage = round(tower.original_damage * self.effect[self.level - 1])

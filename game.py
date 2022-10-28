@@ -20,12 +20,12 @@ class Game:
         self.win = pygame.display.set_mode((self.width, self.height))
         self.enemies = []
         self.attack_towers = [ArcherMonkeyLong(300, 360), ArcherMonkeyShort(800, 360)]
-        self.support_towers = [Alchemist(300, 100), MonkeyVillage(700, 100)]
+        self.support_towers = [Alchemist(350, 360)]
         self.lifes = 100
         self.money = 10
         self.bg = pygame.image.load("game_assets/game_maps/map_1.png")
         self.timer = time.time()
-        self.lifes_font = pygame.font.SysFont("comicsans", 40)
+        self.lifes_font = None
 
     def run(self):
         run = True
@@ -40,8 +40,15 @@ class Game:
                 if event.type == pygame.QUIT:
                     run = False
 
+                pos = pygame.mouse.get_pos()
+
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    pass
+                    for tw in self.attack_towers:
+                        if tw.click(pos[0], pos[1]):
+                            tw.selected = True
+                            self.selected_tower = tw
+                        else:
+                            tw.selected = False
 
             # loop through enemies
             to_del = []
