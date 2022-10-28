@@ -34,6 +34,7 @@ class ArcherMonkeyLong(Tower):
     def draw(self, win):
         super().draw_radius(win)
         super().draw(win)
+
         if self.inRange:
             self.archer_count += 1
             if self.archer_count >= len(self.archer_imgs) * (self.hit_delay * 7):

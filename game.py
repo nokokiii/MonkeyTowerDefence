@@ -23,7 +23,7 @@ class Game:
         self.money = 10
         self.bg = pygame.image.load("game_assets/game_maps/map_1.png")
         self.timer = time.time()
-        self.lifes_font = pygame.font.SysFont("comicsans", 65)
+        self.lifes_font = pygame.font.SysFont("comicsans", 40)
         self.selected_tower = None
 
     def run(self):
@@ -40,11 +40,13 @@ class Game:
                     run = False
 
                 pos = pygame.mouse.get_pos()
+                print(pos)
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     for tw in self.attack_towers:
                         if tw.click(pos[0], pos[1]):
                             tw.selected = True
+                            print("run")
                             self.selected_tower = tw
                         else:
                             tw.selected = False

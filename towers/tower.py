@@ -34,22 +34,24 @@ class Tower:
             self.menu.draw(win)
 
     def draw_radius(self, win):
-        if self.selected:
-            # draw range of the tower
-            surface = pygame.Surface((self.range * 4, self.range * 4), pygame.SRCALPHA, 32)
-            pygame.draw.circle(surface, (128, 128, 128, 100), (self.range, self.range), self.range, 0)
-            win.blit(surface, (self.x - self.range, self.y - self.range))
+        # if self.selected:
+        #     # draw range circle
+        surface = pygame.Surface((self.range * 4, self.range * 4), pygame.SRCALPHA, 32)
+        pygame.draw.circle(surface, (128, 128, 128, 100), (self.range, self.range), self.range, 0)
 
-    def click(self, click_x, click_y):
+        win.blit(surface, (self.x - self.range, self.y - self.range))
+
+    def click(self, X, Y):
         """
-        Returns if tower has been clicked on
+        Returns True if tower has been clicked on
         and selects tower id it was clicked
-        :param click_x:
-        :param click_y:
+        :param X: int
+        :param Y: int
         :return: Bool
         """
-        if click_x <= self.x + self.width and click_x >= self.x:
-            if click_y <= self.y + self.height and click_y >= self.y:
+        img = self.tower_imgs[self.level - 1]
+        if self.x - img.get_width() // 2 + self.width >= X >= self.x - img.get_width() // 2:
+            if self.y + self.height - img.get_height() // 2 >= Y >= self.y - img.get_height() // 2:
                 return True
         return False
 
