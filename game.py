@@ -1,15 +1,13 @@
 import pygame
-from enemies.red import Red
-from enemies.blue import Blue
-from enemies.green import Green
-from enemies.pink import Pink
+from enemies.enemy import Enemy
 from towers.archerMonkey import ArcherMonkeyLong, ArcherMonkeyShort
 from towers.supportTower import MonkeyVillage, Alchemist
 import time
 import random
 pygame.font.init()
 
-lifes_img = pygame.transform.scale(pygame.image.load("game_assets/heart.png"), (40, 40))
+lifes_img = pygame.transform.scale(pygame.image.load("game_assets/heart.png"),
+                                   (40, 40))
 coin_img = pygame.image.load("game_assets/coin.png")
 
 
@@ -25,7 +23,8 @@ class Game:
         self.money = 10
         self.bg = pygame.image.load("game_assets/game_maps/map_1.png")
         self.timer = time.time()
-        self.lifes_font = None
+        self.lifes_font = pygame.font.SysFont("comicsans", 65)
+        self.selected_tower = None
 
     def run(self):
         run = True
@@ -34,7 +33,7 @@ class Game:
             clock.tick(60)
             if time.time() - self.timer >= random.randrange(1, 5)/2:
                 self.timer = time.time()
-                self.enemies.append(random.choice([Red(), Blue(), Green(), Pink()]))
+                self.enemies.append(random.choice([Enemy(4)]))
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

@@ -3,7 +3,7 @@ import pygame
 
 class Menu:
     """
-    Menu for holdiong items
+    Menu for holding items
     """
     def __init__(self, x, y):
         self.x = x
@@ -13,3 +13,6 @@ class Menu:
         self.items_names = []
         self.imgs = []
         self.items = 0
+
+    def click(self, x, y):
+        pass
