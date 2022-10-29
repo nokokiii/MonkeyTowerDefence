@@ -3,7 +3,7 @@ from .tower import Tower
 import math
 
 monkey_village_imgs = [
-    pygame.transform.scale(pygame.image.load("game_assets/towers/support_tower/monkey_village.png"), (86, 86))]
+    pygame.transform.scale(pygame.image.load("game_assets/towers/support_tower/monkey_village.png"), (85, 85))]
 
 
 class MonkeyVillage(Tower):
@@ -14,6 +14,7 @@ class MonkeyVillage(Tower):
         super().__init__(x, y)
         self.range = 90
         self.tower_imgs = monkey_village_imgs[:]
+        self.width = self.height = 85
         self.effect = [0.2, 0.4]
 
     def draw(self, win):
@@ -52,6 +53,7 @@ class Alchemist(MonkeyVillage):
         self.range = 100
         self.effect = [2, 3]
         self.tower_imgs = alchemist_imgs[:]
+        self.width = self.height = 80
 
     def support(self, towers):
         """

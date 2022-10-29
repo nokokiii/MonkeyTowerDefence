@@ -27,6 +27,7 @@ class ArcherMonkeyLong(Tower):
         self.inRange = False
         self.left = True
         self.timer = time.time()
+        self.height = self.width = 65
         self.hit_delay = 1
         self.damage = 1
         self.original_damage = self.damage
@@ -43,7 +44,7 @@ class ArcherMonkeyLong(Tower):
             self.archer_count = 0
 
         archer = self.archer_imgs[self.archer_count // (self.hit_delay * 7)]
-        win.blit(archer, ((self.x + self.width / 2) - (archer.get_width() / 2),
+        win.blit(archer, ((self.x + self.width / 2) - (archer.get_width()),
                           (self.y - archer.get_height() + (archer.get_height() / 2) - 20)))
 
     def change_range(self, r):

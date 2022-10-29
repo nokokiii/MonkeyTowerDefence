@@ -18,8 +18,8 @@ class Game:
         self.win = pygame.display.set_mode((self.width, self.height))
         self.enemies = []
         self.attack_towers = [ArcherMonkeyLong(300, 360), ArcherMonkeyShort(800, 360)]
-        self.support_towers = [Alchemist(350, 360)]
-        self.lifes = 100
+        self.support_towers = [Alchemist(400, 360)]
+        self.lives = 100
         self.money = 10
         self.bg = pygame.image.load("game_assets/game_maps/map_1.png")
         self.timer = time.time()
@@ -40,16 +40,23 @@ class Game:
                     run = False
 
                 pos = pygame.mouse.get_pos()
-                print(pos)
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
+                    # checking if you clicked on attack tower
                     for tw in self.attack_towers:
                         if tw.click(pos[0], pos[1]):
                             tw.selected = True
-                            print("run")
                             self.selected_tower = tw
                         else:
                             tw.selected = False
+
+                        # checking if you clicked on support tower
+                        for tw in self.support_towers:
+                            if tw.click(pos[0], pos[1]):
+                                tw.selected = True
+                                self.selected_tower = tw
+                            else:
+                                tw.selected = False
 
             # loop through enemies
             to_del = []
@@ -59,6 +66,7 @@ class Game:
 
             # delete all enemies off the screen
             for d in to_del:
+                self.lives -= Enemy.attacking(d)
                 self.enemies.remove(d)
 
             # loop through attack towers
@@ -70,8 +78,8 @@ class Game:
                 stw.support(self.attack_towers)
 
             # if you lose
-            if self.lifes < 0:
-                print("You lose")
+            if self.lives <= 0:
+                print("You lost")
                 run = False
 
             self.draw()
@@ -94,7 +102,7 @@ class Game:
             en.draw(self.win)
 
         # Draw lifes
-        text = self.lifes_font.render(str(self.lifes), 1, (0, 0, 0))
+        text = self.lifes_font.render(str(self.lives), 1, (0, 0, 0))
         start_x = self.width
         life = lifes_img
 

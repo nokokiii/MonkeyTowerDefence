@@ -31,15 +31,16 @@ class Tower:
 
         # draw menu
         if self.selected:
-            self.menu.draw(win)
+            pass
+            #self.menu.draw(win)
 
     def draw_radius(self, win):
-        # if self.selected:
-        #     # draw range circle
-        surface = pygame.Surface((self.range * 4, self.range * 4), pygame.SRCALPHA, 32)
-        pygame.draw.circle(surface, (128, 128, 128, 100), (self.range, self.range), self.range, 0)
+        if self.selected:
+            # draw range circle
+            surface = pygame.Surface((self.range * 4, self.range * 4), pygame.SRCALPHA, 32)
+            pygame.draw.circle(surface, (128, 128, 128, 100), (self.range, self.range), self.range, 0)
 
-        win.blit(surface, (self.x - self.range, self.y - self.range))
+            win.blit(surface, (self.x - self.range, self.y - self.range))
 
     def click(self, X, Y):
         """
