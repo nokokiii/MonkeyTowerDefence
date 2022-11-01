@@ -34,8 +34,9 @@ class Menu:
     def __init__(self, x, y, img):
         self.x = x
         self.y = y
-        self.width = img.get_width()
-        self.height = img.get_height()
+        self.img = img
+        self.width = self.img.get_width()
+        self.height = self.img.get_height()
         self.items_names = []
         self.buttons = []
         self.items = 0
@@ -64,7 +65,7 @@ class Menu:
         inc_x = self.width
         btn_x = self.items * inc_x - img.get_width()/2
         btn_y = self.y + self.height/2 - img.get_height()/2
-        self.buttons.append(Button(btn_x, btn_y, img, name))
+        self.buttons.append(Button(img, btn_x, btn_y, name))
 
     def draw(self, win):
         """
