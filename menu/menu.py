@@ -1,5 +1,7 @@
 import pygame
 
+money = pygame.transform.scale(pygame.image.load("game_assets/coin.png"), (50, 50))
+
 
 class Button:
     def __init__(self, img, x, y, name):
@@ -31,13 +33,13 @@ class Menu:
     Menu for holding items
     """
 
-    def __init__(self, x, y, img):
+    def __init__(self, x, y, img, item_cost):
         self.x = x
         self.y = y
         self.img = img
         self.width = self.img.get_width()
         self.height = self.img.get_height()
-        self.items_names = []
+        self.items_cost = item_cost
         self.buttons = []
         self.items = 0
         self.bg = img
@@ -58,13 +60,13 @@ class Menu:
         """
         adds button to the menu
         :param img: surface
-        :param name: screen
+        :param name: str
         :return: None
         """
         self.items += 1
         inc_x = self.width
         btn_x = self.items * inc_x - img.get_width()/2
-        btn_y = self.y + self.height/2 - img.get_height()/2
+        btn_y = self.y + self.height/2
         self.buttons.append(Button(img, btn_x, btn_y, name))
 
     def draw(self, win):

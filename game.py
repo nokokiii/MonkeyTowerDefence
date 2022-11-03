@@ -33,7 +33,7 @@ class Game:
             clock.tick(60)
             if time.time() - self.timer >= random.randrange(1, 5)/2:
                 self.timer = time.time()
-                self.enemies.append(random.choice([Enemy(4)]))
+                self.enemies.append(random.choice([Enemy(1), Enemy(2), Enemy(3), Enemy(4)]))
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
