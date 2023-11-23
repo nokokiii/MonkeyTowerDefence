@@ -5,7 +5,7 @@ imgs = []
 for x in range(1, 5):
     add_str = str(x)
     print()
-    img = pygame.image.load("game_assets/enemies/enemy_" + add_str + ".png")
+    img = pygame.image.load(f"game_assets/enemies/enemy_{add_str}.png")
     imgs.append(pygame.transform.scale(img, (60, 60)))
 
 
@@ -73,9 +73,7 @@ class Enemy:
         """
         self.pop = True
         self.health -= damage
-        if self.health <= 0:
-            return True
-        return False
+        return self.health <= 0
 
     def attacking(self):
         return self.health

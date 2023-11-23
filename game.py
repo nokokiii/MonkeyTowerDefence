@@ -58,12 +58,7 @@ class Game:
                             else:
                                 tw.selected = False
 
-            # loop through enemies
-            to_del = []
-            for en in self.enemies:
-                if en.x > 1300:
-                    to_del.append(en)
-
+            to_del = [en for en in self.enemies if en.x > 1300]
             # delete all enemies off the screen
             for d in to_del:
                 self.lives -= Enemy.attacking(d)

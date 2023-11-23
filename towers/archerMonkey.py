@@ -3,17 +3,21 @@ from .tower import Tower
 import math
 import time
 
-tower_imgs1 = []
-archer_imgs1 = []
-
-# Load tower img
-tower_imgs1.append(pygame.transform.scale(pygame.image.load("game_assets/towers/archer_long/archer_tower.png"),
-                                          (70, 70)))
-# Load archer images
-for x in range(1, 5):
-    archer_imgs1.append(
-        pygame.transform.scale(pygame.image.load("game_assets/towers/archer_long/long_archer_" + str(x) + ".png"),
-                               (65, 65)))
+tower_imgs1 = [
+    pygame.transform.scale(
+        pygame.image.load("game_assets/towers/archer_long/archer_tower.png"),
+        (70, 70),
+    )
+]
+archer_imgs1 = [
+    pygame.transform.scale(
+        pygame.image.load(
+            f"game_assets/towers/archer_long/long_archer_{str(x)}.png"
+        ),
+        (65, 65),
+    )
+    for x in range(1, 5)
+]
 
 
 class ArcherMonkeyLong(Tower):
@@ -75,7 +79,7 @@ class ArcherMonkeyLong(Tower):
                 enemy_closest.append(enemy)
 
         enemy_closest.sort(key=lambda x: x.x)
-        if len(enemy_closest) > 0:
+        if enemy_closest:
             first_enemy = enemy_closest[0]
             if time.time() - self.timer >= self.hit_delay:
                 self.timer = time.time()
@@ -91,14 +95,17 @@ class ArcherMonkeyLong(Tower):
                     self.archer_imgs[x] = pygame.transform.flip(img, True, False)
 
 
-archer_imgs2 = []
 tower_imgs2 = [pygame.transform.scale(pygame.image.load("game_assets/towers/archer_long/archer_tower.png"),
                                       (70, 70))]
-# Load archer images
-for x in range(1, 5):
-    archer_imgs2.append(
-        pygame.transform.scale(pygame.image.load("game_assets/towers/archer_short/short_archer_" + str(x) + ".png"),
-                               (65, 65)))
+archer_imgs2 = [
+    pygame.transform.scale(
+        pygame.image.load(
+            f"game_assets/towers/archer_short/short_archer_{str(x)}.png"
+        ),
+        (65, 65),
+    )
+    for x in range(1, 5)
+]
 
 
 class ArcherMonkeyShort(ArcherMonkeyLong):
